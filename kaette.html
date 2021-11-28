@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+    <h1>明日も仕事だし、そろそろ帰りたいなぁ～</h1>
+    <h1>あなたはどうしますか？</h1>
+    <img id="kekka" src="img/kaeritai.jpg" alt="">
+</header>
+
+
+<div class="board">
+  
+    <div class="choice">
+        <p class="sentaku">
+            <button class="erabu" id="button1" >
+            <img class="image" src="img/beer.png" onclick="document.getElementById('kekka').src='img/changeimg/osyaku.jpg';" onclick="rsp(0)">
+            <br><b>もう一杯どうですか？</b>
+            </button>
+            <button class="erabu" id="button2"><img class="image" src="img/karaoke.png" onclick="document.getElementById('kekka').src='img/changeimg/karakan.jpg';" onclick="rsp(1);">
+            <br><b>カラオケ行きますか！</b></button>
+            <button class="erabu" id="button3"><img class="image" src="img/kyabakura.png" onclick="document.getElementById('kekka').src='img/changeimg/kyaba.png';" onclick="rsp(2);">
+            <br><b>キャバクラ行っちゃいます？</b>
+            </button>
+            <button class="erabu" id="button4"><img class="image" src="img/jousya.png" onclick="document.getElementById('kekka').src='img/changeimg/syuden.jpg';" onclick="rsp(3);">
+            <br><b>そろそろ終電なくなりますよ</b>
+            </button>
+            <button class="erabu" id="button5"> <img class="image" src="img/taxi.png" onclick="document.getElementById('kekka').src='img/changeimg/taxi_yobu.jpg';" onclick="rsp(4);">
+            <br><b>タクシー呼びますか？</b>
+            </button>
+        </p>
+    </div>
+    
+</div>
+
+
+<div id="modalbutton">
+    <button id="modalOpen" class="button">結果をみる</button>
+<div id="easyModal" class="modal">
+<div class="modal-content">
+    <div class="modal-header">
+        <h1>結果発表 🎉</h1>
+        <span class="modalClose">×</span>
+        </div>
+        <div class="modal-body">
+            <img id="resultimg" src="" alt="">
+            <p id="player">選択したのは</p>
+            <p id="resultMsg">上司：</p>
+        </div>
+</div>
+</div>
+</div>
+
+<script>
+
+    $("#modalbutton") .click(function rsp(playerSelect) {
+       let result;
+       let playerSelectHand;
+       let comSelectHand;
+       let resultString;
+       let random = Math.random();
+       let comSelect = Math.floor(random * 4);
+       console.log(comSelect);
+    
+       console.log(playerSelect);
+       /*
+        * 0: 馬鹿野郎まだまだ行くぞ
+        * 1: 帰るか
+        * 2: いいね
+        */
+       if (playerSelect == comSelect) {
+           // 一緒だったらいいね
+           result = 2;
+       } else if (playerSelect > comSelect) {
+        result = 1;
+        } else {
+        result = 0;
+        } 
+       console.log(result);
+    
+       if (playerSelect == 0) {
+           playerSelectHand = 'ビール';
+       } else if (playerSelect == 1) {
+           playerSelectHand = 'カラオケ';
+       } else　if (playerSelect == 2) {
+           playerSelectHand = 'キャバクラ';
+       } else if (playerSelect == 3){
+           playerSelectHand = '電車';
+       }　else　if (playerSelect == 4) {
+           playerSelectHand = 'タクシー';
+       }
+    
+       if (result == 0) {
+            resultString = '馬鹿野郎まだまだ行くぞ';
+        } else if (result == 1) {
+            resultString = '帰るか';
+        } else {
+            resultString = 'いいね、そうしよう';
+        }
+    
+       document.getElementById('player').innerHTML = '選択したのは： ' + playerSelectHand;
+       document.getElementById('resultMsg').innerHTML = '上司： ' + resultString;
+       
+       if (result == 0) {
+       document.getElementById('resultimg').src='img/karami.png';
+       } else if (result == 1) {
+        document.getElementById('resultimg').src='img/kitaku.png';
+       } else {
+       document.getElementById('resultimg').src='img/yopparai.png';
+       }
+    
+    
+    });
+    
+    //モーダルウィンドウ
+    const buttonOpen = document.getElementById('modalOpen');
+    const modal = document.getElementById('easyModal');
+    const buttonClose = document.getElementsByClassName('modalClose')[0];
+    
+    //ボタンがクリックされた時
+    buttonOpen.addEventListener('click', modalOpen);
+    function modalOpen() {
+    　　modal.style.display = 'block';
+    };
+    
+    //バツ印がクリックされた時
+    buttonClose.addEventListener('click', modalClose);
+    function modalClose() {
+    　　modal.style.display = 'none';
+    };
+    
+    //モーダルコンテンツ以外がクリックされた時
+    addEventListener('click', outsideClose);
+    function outsideClose(e) {
+    　　if (e.target == modal) {
+    　　modal.style.display = 'none';
+    　　};
+    };
+    
+    //ここまでモーダルウィンドウ
+    
+    
+    
+    
+</script>
+
+<footer></footer>
+
+
+
+
+</body>
+</html>
