@@ -21,18 +21,18 @@
     <div class="choice">
         <p class="sentaku">
             <button class="erabu" id="button1" >
-            <img class="image" src="img/beer.png" onclick="document.getElementById('kekka').src='img/changeimg/osyaku.jpg';" onclick="rsp(0)">
+            <img class="image" src="img/beer.png" onclick="rsp(0)">
             <br><b>もう一杯どうですか？</b>
             </button>
-            <button class="erabu" id="button2"><img class="image" src="img/karaoke.png" onclick="document.getElementById('kekka').src='img/changeimg/karakan.jpg';" onclick="rsp(1);">
+            <button class="erabu" id="button2"><img class="image" src="img/karaoke.png" onclick="rsp(1);">
             <br><b>カラオケ行きますか！</b></button>
-            <button class="erabu" id="button3"><img class="image" src="img/kyabakura.png" onclick="document.getElementById('kekka').src='img/changeimg/kyaba.png';" onclick="rsp(2);">
+            <button class="erabu" id="button3"><img class="image" src="img/kyabakura.png" onclick="rsp(2);">
             <br><b>キャバクラ行っちゃいます？</b>
             </button>
-            <button class="erabu" id="button4"><img class="image" src="img/jousya.png" onclick="document.getElementById('kekka').src='img/changeimg/syuden.jpg';" onclick="rsp(3);">
+            <button class="erabu" id="button4"><img class="image" src="img/jousya.png" onclick="rsp(3);">
             <br><b>そろそろ終電なくなりますよ</b>
             </button>
-            <button class="erabu" id="button5"> <img class="image" src="img/taxi.png" onclick="document.getElementById('kekka').src='img/changeimg/taxi_yobu.jpg';" onclick="rsp(4);">
+            <button class="erabu" id="button5"> <img class="image" src="img/taxi.png" onclick="rsp(4);">
             <br><b>タクシー呼びますか？</b>
             </button>
         </p>
@@ -40,33 +40,43 @@
     
 </div>
 
+<script>
+let playerSelect
+$('.erabu').click(function playernum() { 
+    let playerSelect = getElementById('erabu')
+ })
+
+</script>
+
 
 <div id="modalbutton">
-    <button id="modalOpen" class="button">結果をみる</button>
+    <button id="modalOpen" class="button" >結果をみる</button>
 <div id="easyModal" class="modal">
 <div class="modal-content">
     <div class="modal-header">
         <h1>結果発表 🎉</h1>
-        <span class="modalClose">×</span>
+        
         </div>
         <div class="modal-body">
             <img id="resultimg" src="" alt="">
             <p id="player">選択したのは</p>
             <p id="resultMsg">上司：</p>
         </div>
+    <button class="modalClose">閉じる</button>
 </div>
 </div>
 </div>
 
 <script>
 
-    $("#modalbutton") .click(function rsp(playerSelect) {
+    function rsp(playerSelect) {
+        console.log(playerSelect);
        let result;
        let playerSelectHand;
        let comSelectHand;
        let resultString;
        let random = Math.random();
-       let comSelect = Math.floor(random * 4);
+       let comSelect = Math.floor(random * 9);
        console.log(comSelect);
     
        console.log(playerSelect);
@@ -116,8 +126,8 @@
        document.getElementById('resultimg').src='img/yopparai.png';
        }
     
-    
-    });
+    }
+
     
     //モーダルウィンドウ
     const buttonOpen = document.getElementById('modalOpen');
@@ -133,14 +143,14 @@
     //バツ印がクリックされた時
     buttonClose.addEventListener('click', modalClose);
     function modalClose() {
-    　　modal.style.display = 'none';
+        　　location.reload();
     };
     
     //モーダルコンテンツ以外がクリックされた時
     addEventListener('click', outsideClose);
     function outsideClose(e) {
     　　if (e.target == modal) {
-    　　modal.style.display = 'none';
+        　　location.reload();
     　　};
     };
     
